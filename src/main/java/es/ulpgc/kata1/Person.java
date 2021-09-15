@@ -1,17 +1,15 @@
 
 package es.ulpgc.kata1;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
+import java.time.LocalDate;
+import java.time.Period;
 
 
 public class Person {
     private final String name; 
-    private final Calendar birthdate;
-    
+    private final LocalDate birthdate;
 
-    public Person(String name, Calendar birthdate) {
+    public Person(String name, LocalDate birthdate) {
         this.name = name;
         this.birthdate = birthdate;
     }
@@ -22,11 +20,7 @@ public class Person {
 
     int getAge() {
         
-        Calendar today = GregorianCalendar.getInstance();
-        
-        final long MillisecondsPerYear = (long) (365.25*24*60*60*1000);
-        return (int) ((today.getTimeInMillis() - birthdate.getTimeInMillis())/MillisecondsPerYear);
-        
+        return Period.between(birthdate, LocalDate.now()).getYears();
     }
 
     
